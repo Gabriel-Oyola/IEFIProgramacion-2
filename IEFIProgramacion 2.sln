@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IEFIProgramacion 2", "IEFIProgramacion 2\IEFIProgramacion 2.csproj", "{A6C6B01E-8EA2-4B77-A587-15434AD6F925}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datos", "DatosCelulares\Datos.csproj", "{87816D24-7252-4B54-848A-635265961724}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6C6B01E-8EA2-4B77-A587-15434AD6F925}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6C6B01E-8EA2-4B77-A587-15434AD6F925}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6C6B01E-8EA2-4B77-A587-15434AD6F925}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6C6B01E-8EA2-4B77-A587-15434AD6F925}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87816D24-7252-4B54-848A-635265961724}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87816D24-7252-4B54-848A-635265961724}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87816D24-7252-4B54-848A-635265961724}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87816D24-7252-4B54-848A-635265961724}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {78483AD5-3B21-46AD-95E1-912F2009905D}
+	EndGlobalSection
+EndGlobal
