@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data;
-using System.Data.sq
 
-namespace DatosCelulares
+namespace Entidades
 {
-    public class Celulares
+    public class Celular
     {
         #region Atributos
         private int IdCelular;
@@ -27,31 +25,31 @@ namespace DatosCelulares
         {
             set { Marca = value; }
             get { return Marca; }
-        } 
+        }
 
-        public string  p_Modelo
+        public string p_Modelo
         {
             set { Modelo = value; }
             get { return Modelo; }
         }
 
         public string P_Repacion
-        { 
-            set { Reparacion = value; } 
+        {
+            set { Reparacion = value; }
             get { return Reparacion; }
 
         }
 
         public bool P_Estado
         {
-            set { Estado = value; } 
+            set { Estado = value; }
             get { return Estado; }
-        } 
+        }
 
         public long P_Dni_Tecnico
         {
-             set { Dni_Tecnico = value;}
-            get { return Dni_Tecnico;}
+            set { Dni_Tecnico = value; }
+            get { return Dni_Tecnico; }
         }
 
         public int P_Costo_total
@@ -63,29 +61,29 @@ namespace DatosCelulares
 
         public DateTime P_FechaIngreso
         {
-            set { FechaIngreso = value;}
+            set { FechaIngreso = value; }
             get { return FechaIngreso; }
-        } 
+        }
 
         public DateTime P_FechaEgreso
         {
-            set { FechaEgreso = value;}
+            set { FechaEgreso = value; }
             get { return FechaEgreso; }
         }
         #endregion
 
         #region Constructor
-        public Celulares (string marca, string modelo, string reparacion, bool estado, 
+        public Celular(string marca, string modelo, string reparacion, bool estado,
             long tecnico, int costoTotal, DateTime FechaI, DateTime FechaE)
         {
-            Marca = marca; 
+            Marca = marca;
             Modelo = modelo;
-            Reparacion = reparacion; 
+            Reparacion = reparacion;
             Estado = estado;
             Dni_Tecnico = tecnico;
             Costo_total = costoTotal;
             FechaIngreso = FechaI;
-            FechaEgreso = FechaE; 
+            FechaEgreso = FechaE;
         }
         #endregion  
 
