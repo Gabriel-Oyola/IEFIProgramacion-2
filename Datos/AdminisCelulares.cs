@@ -11,23 +11,28 @@ namespace Datos
 {
     public class AdminisCelulares : CadenaConexion
     {
-        public int abmProductos(string accion, Celular objProducto)
+        public int abmCelulares(string accion, Celular objCelular)
         {
             {
                 int resultado = -1;//controlar que se realice la operacion con exito
                 string orden = string.Empty;//para guardar consulta
 
                 if (accion == "Alta")
-                    orden = "insert into Producto values (" + objProducto.P_Marca + ",'" + objProducto.p_Modelo + "', " + objProducto.P_Repacion + "', " + 
-                        objProducto.P_Estado + "', " + objProducto.P_Dni_Tecnico + "', " +
-                        objProducto.P_FechaIngreso + "', " + objProducto.P_FechaEgreso + "); ";
+                    orden = "insert into Producto values (" + objCelular.P_Marca + ",'" + objCelular.p_Modelo + "', " + objCelular.P_Repacion + "', " + 
+                        objCelular.P_Estado + "', " + objCelular.P_Dni_Tecnico + "', " +
+                        objCelular.P_FechaIngreso + "', " + objCelular.P_FechaEgreso + "); ";
 
+                if (accion == "Modificar")
+                    orden = "update Celulares set Marca='" + objCelular.P_Marca + " Modelo= " + objCelular.p_Modelo+ "Reparacion= "
+                        + objCelular.P_Repacion+ "Estado: "+objCelular.P_Estado 
+                        + "Dni_tecnico= "+ objCelular.P_Dni_Tecnico+"costo_total= "+ objCelular.P_Costo_total 
+                        + "FechaIngreso= "+ objCelular.P_FechaIngreso+ "FechaEgreso= "+objCelular.P_FechaEgreso +"where Id= " + objCelular.p_id+ "; ";
 
 
                 if (accion == "Borrar")
-                    orden = "delete into Producto values (" + objProducto.P_Marca + ",'" + objProducto.p_Modelo + "', " + objProducto.P_Repacion + "', " +
-                        objProducto.P_Estado + "', " + objProducto.P_Dni_Tecnico + "', " +
-                        objProducto.P_FechaIngreso + "', " + objProducto.P_FechaEgreso + "',); ";
+                    orden = "delete into Producto values (" + objCelular.P_Marca + ",'" + objCelular.p_Modelo + "', " + objCelular.P_Repacion + "', " +
+                        objCelular.P_Estado + "', " + objCelular.P_Dni_Tecnico + "', " +
+                        objCelular.P_FechaIngreso + "', " + objCelular.P_FechaEgreso + "',); ";
                 // falta la orden de borrar
 
 
@@ -53,15 +58,15 @@ namespace Datos
 
         }
 
-        public DataSet listadoProductos(string cual)//para uno o todos los dato segun el codigo
+        public DataSet listadoCelulares(string cual)//para uno o todos los dato segun el codigo
         {
             string orden = string.Empty;
 
 
             if (cual != "Todos") //entonces me va devolver un solo valor 
-                orden = "select * from Productos where Codigo = " + int.Parse(cual) + ";";
+                orden = "select * from Celular where Id = " + int.Parse(cual) + ";";
             else
-                orden = "select * from Producto;";
+                orden = "select * from Celular;";
 
 
             SqlCommand cmd = new SqlCommand(orden, conexion);
@@ -80,7 +85,7 @@ namespace Datos
             }
             catch (Exception e)
             {
-                throw new Exception("Error al listar profesionales", e);
+                throw new Exception("Error al listar celulares", e);
             }
             finally
             {

@@ -13,14 +13,19 @@ namespace Entidades
         private string Marca;
         private string Modelo;
         private string Reparacion;
-        private bool Estado;
+        private string Estado;
         private long Dni_Tecnico;
         private int Costo_total;
-        private DateTime FechaIngreso;
-        private DateTime FechaEgreso;
+        private string FechaIngreso;
+        private string FechaEgreso;
         #endregion
 
-        #region Propiedades
+        #region Propiedades 
+
+        public int p_id
+        {
+            get { return IdCelular; }
+        }
         public string P_Marca
         {
             set { Marca = value; }
@@ -40,7 +45,7 @@ namespace Entidades
 
         }
 
-        public bool P_Estado
+        public string P_Estado
         {
             set { Estado = value; }
             get { return Estado; }
@@ -59,13 +64,13 @@ namespace Entidades
             get { return Costo_total; }
         }
 
-        public DateTime P_FechaIngreso
+        public string P_FechaIngreso
         {
             set { FechaIngreso = value; }
             get { return FechaIngreso; }
         }
 
-        public DateTime P_FechaEgreso
+        public string P_FechaEgreso
         {
             set { FechaEgreso = value; }
             get { return FechaEgreso; }
@@ -73,8 +78,8 @@ namespace Entidades
         #endregion
 
         #region Constructor
-        public Celular(string marca, string modelo, string reparacion, bool estado,
-            long tecnico, int costoTotal, DateTime FechaI, DateTime FechaE)
+        public Celular(string marca, string modelo, string reparacion, string estado,
+            long tecnico, int costoTotal, string FechaI, string FechaE)
         {
             Marca = marca;
             Modelo = modelo;
@@ -85,7 +90,18 @@ namespace Entidades
             FechaIngreso = FechaI;
             FechaEgreso = FechaE;
         }
-        #endregion  
+        #endregion
+
+
+        public void ingreso( string estado)
+        {
+            Estado = estado;
+        }
+
+        public void Egreso(string estado)
+        {
+            Estado = estado;
+        }
 
     }
 }
