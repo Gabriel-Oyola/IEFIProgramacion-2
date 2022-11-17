@@ -11,7 +11,7 @@ namespace Datos
     public class CadenaConexion
     {
         protected SqlConnection conexion;
-        protected string cadenaConexion = @"Data Source=DESKTOP-NUSLQEB\SQLEXPRESS;Initial Catalog=EntidadesNegocioCelulares;Integrated Security=True";
+        protected string cadenaConexion = @"Data Source=DESKTOP-NUSLQEB\SQLEXPRESS;Initial Catalog=Celular;Integrated Security=True";
 
         public CadenaConexion()
         {

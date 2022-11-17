@@ -9,12 +9,12 @@ namespace Entidades
     public class Celular
     {
         #region Atributos
-        private int IdCelular;
+        private int CodCelular;
         private string Marca;
         private string Modelo;
         private string Reparacion;
         private string Estado;
-        private long Dni_Tecnico;
+        private int Dni_Tecnico;
         private int Costo_total;
         private string FechaIngreso;
         private string FechaEgreso;
@@ -24,7 +24,9 @@ namespace Entidades
 
         public int p_id
         {
-            get { return IdCelular; }
+            get { return CodCelular; }
+            set { CodCelular = value;}
+
         }
         public string P_Marca
         {
@@ -51,7 +53,7 @@ namespace Entidades
             get { return Estado; }
         }
 
-        public long P_Dni_Tecnico
+        public int P_Dni_Tecnico
         {
             set { Dni_Tecnico = value; }
             get { return Dni_Tecnico; }
@@ -78,9 +80,10 @@ namespace Entidades
         #endregion
 
         #region Constructor
-        public Celular(string marca, string modelo, string reparacion, string estado,
-            long tecnico, int costoTotal, string FechaI, string FechaE)
+        public Celular(int codigo, string marca, string modelo, string reparacion, string estado,
+            int tecnico, int costoTotal, string FechaI, string FechaE)
         {
+            CodCelular = codigo;
             Marca = marca;
             Modelo = modelo;
             Reparacion = reparacion;

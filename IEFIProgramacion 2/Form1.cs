@@ -17,16 +17,20 @@ namespace IEFIProgramacion_2
         Celular nuevoIngreso;
         Celular Cargado; 
         NegProfesionalCelular objNegCelular = new NegProfesionalCelular();
+
+        Tecnico NuevoTecnico;
+        Tecnico CargarTecnico; 
+        NegTecnicos objNegTecnicos = new NegTecnicos();
         bool nuevo = true;
         int fila; 
         public Form1()
         {
             InitializeComponent();
-            CrearDgv();
-            LlenarDgv();
+            CrearDgvC();
+            LlenarDgvC();
         }
 
-        private void LlenarDgv()
+        private void LlenarDgvC()
         {
             dgvCelular.Rows.Clear(); 
             DataSet ds = new DataSet();
@@ -47,7 +51,7 @@ namespace IEFIProgramacion_2
             }
         }
 
-        private void CrearDgv()
+        private void CrearDgvC()
         {
             dgvCelular.Columns.Add("0", "Id");
             dgvCelular.Columns.Add("1", "Marca");
@@ -75,6 +79,38 @@ namespace IEFIProgramacion_2
 
         }
 
+        private void LlenarDgvT()
+        {
+            dgvTecnico.Rows.Clear();
+            DataSet ds = new DataSet();
+
+            ds = objNegTecnicos.listadoTecnicos("Todos");
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    dgvTecnico.Rows.Add(dr[0].ToString(), dr[1], dr[2]);
+                }
+            }    
+            else
+            {
+                MessageBox.Show("No hay datos cargados en el sistema");
+            }
+        }
+
+        private void CrearDgvT()
+        {
+            dgvTecnico.Columns.Add("0", "DNI");
+            dgvTecnico.Columns.Add("1", "Nombre");
+            dgvTecnico.Columns.Add("2", "Apellido");
+          
+
+
+            dgvTecnico.Columns[0].Width = 100;
+            dgvTecnico.Columns[1].Width = 100;
+            dgvTecnico.Columns[2].Width = 100;
+
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
             cbEstado.Items.Add("Pendiente");
@@ -88,7 +124,7 @@ namespace IEFIProgramacion_2
         {
             int nGrabados = -1;
 
-            nuevoIngreso = new Celular(txtMarca.Text, txtModelo.Text,
+            nuevoIngreso = new Celular(int.Parse(txtCodigo.Text),txtMarca.Text, txtModelo.Text,
                 txtReparacion.Text, cbEstado.Text, int.Parse(cbTecnico.Text),
 int.Parse(txtCostoTotal.Text), txtFechaIngreso.Text, txtFechaEgreso.Text);
 
@@ -100,6 +136,7 @@ int.Parse(txtCostoTotal.Text), txtFechaIngreso.Text, txtFechaEgreso.Text);
             } 
             else
             {
+                txtCodigo.Text  = nuevoIngreso.p_id.ToString();
                 txtMarca.Text = nuevoIngreso.P_Marca;
                 txtModelo.Text = nuevoIngreso.p_Modelo;
                 txtReparacion.Text = nuevoIngreso.P_Repacion;
@@ -117,7 +154,7 @@ int.Parse(txtCostoTotal.Text), txtFechaIngreso.Text, txtFechaEgreso.Text);
 
                 void LlevarProdAldgv(Celular cel)
                 {
-                    dgvCelular.Rows.Add(cel.P_Marca,
+                    dgvCelular.Rows.Add(cel.p_id,cel.P_Marca,
                     cel.p_Modelo, cel.P_Repacion, cel.P_Estado, cel.P_Estado,cel.P_Dni_Tecnico, cel.P_Dni_Tecnico
                     ,cel.P_Costo_total.ToString(), cel.P_FechaIngreso, cel.P_FechaEgreso);
                     fila = (dgvCelular.Rows.Count - 1);
@@ -130,7 +167,7 @@ int.Parse(txtCostoTotal.Text), txtFechaIngreso.Text, txtFechaEgreso.Text);
 
         private void btAceptar_Click(object sender, EventArgs e)
         {
-            if (nuevo == false) //si el producto es viejo va a ser false
+            if (nuevo == false) 
             {
 
                 if (rdIngreso.Checked == true)
@@ -141,7 +178,7 @@ int.Parse(txtCostoTotal.Text), txtFechaIngreso.Text, txtFechaEgreso.Text);
                 {
                     Cargado.Egreso(cbEstado.SelectedItem.ToString());
                 }
-                // LlevarProdAldgv(NuevoProducto, fila);
+             
                 int nResultado = -1;
                 nResultado = objNegCelular.abmCelulares("Modificar", Cargado);
 
@@ -194,12 +231,10 @@ int.Parse(txtCostoTotal.Text), txtFechaIngreso.Text, txtFechaEgreso.Text);
         private void dgvCelular_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             Cargado = new Celular(Convert.ToInt32(dgvCelular.CurrentRow.Cells[0].Value),
-               dgvCelular.CurrentRow.Cells[1].Value, dgvCelular.CurrentRow.Cells[2].Value, 
-               dgvCelular.CurrentRow.Cells[3].Value, dgvCelular.CurrentRow.Cells[4].Value,
-                dgvCelular.CurrentRow.Cells[5].Value, dgvCelular.CurrentRow.Cells[6].Value.ToString(),
-                 dgvCelular.CurrentRow.Cells[7].Value, dgvCelular.CurrentRow.Cells[8].Value
-               
-               );
+               dgvCelular.CurrentRow.Cells[1].Value.ToString(), dgvCelular.CurrentRow.Cells[2].Value.ToString(), 
+               dgvCelular.CurrentRow.Cells[3].Value.ToString(), dgvCelular.CurrentRow.Cells[4].Value.ToString(),
+               Convert.ToInt32( dgvCelular.CurrentRow.Cells[5].Value), Convert.ToInt32(dgvCelular.CurrentRow.Cells[6].Value),
+                 dgvCelular.CurrentRow.Cells[7].Value.ToString(), dgvCelular.CurrentRow.Cells[8].Value.ToString());
             nuevo = false;
             DataSet ds = new DataSet();
 
@@ -211,6 +246,7 @@ int.Parse(txtCostoTotal.Text), txtFechaIngreso.Text, txtFechaEgreso.Text);
         }
         private void Ds_a_Controles(DataSet ds)
         {
+            txtCodigo.Text = ds.Tables[0].Rows[0]["CodCelular"].ToString();
             txtMarca.Text = ds.Tables[0].Rows[0]["Marca"].ToString();
             txtModelo.Text = ds.Tables[0].Rows[0]["Modelo"].ToString();
             //lbl_StockMov.Text = ds.Tables[0].Rows[0]["stock"].ToString() + "unidades";

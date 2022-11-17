@@ -18,23 +18,24 @@ namespace Datos
                 string orden = string.Empty;//para guardar consulta
 
                 if (accion == "Alta")
-                    orden = "insert into Producto values (" + objCelular.P_Marca + ",'" + objCelular.p_Modelo + "', " + objCelular.P_Repacion + "', " + 
+                    orden = "insert into Celulares values (" + objCelular.p_id+",'"+ objCelular.P_Marca + ",'" + objCelular.p_Modelo + "', " + objCelular.P_Repacion + "', " + 
                         objCelular.P_Estado + "', " + objCelular.P_Dni_Tecnico + "', " +
                         objCelular.P_FechaIngreso + "', " + objCelular.P_FechaEgreso + "); ";
 
                 if (accion == "Modificar")
-                    orden = "update Celulares set Marca='" + objCelular.P_Marca + " Modelo= " + objCelular.p_Modelo+ "Reparacion= "
+                    orden = "update Celulares set CodCelular='"+objCelular.p_id+"Marca= " + objCelular.P_Marca + " Modelo= " + objCelular.p_Modelo+ "Reparacion= "
                         + objCelular.P_Repacion+ "Estado: "+objCelular.P_Estado 
                         + "Dni_tecnico= "+ objCelular.P_Dni_Tecnico+"costo_total= "+ objCelular.P_Costo_total 
                         + "FechaIngreso= "+ objCelular.P_FechaIngreso+ "FechaEgreso= "+objCelular.P_FechaEgreso +"where Id= " + objCelular.p_id+ "; ";
 
 
                 if (accion == "Borrar")
-                    orden = "delete into Producto values (" + objCelular.P_Marca + ",'" + objCelular.p_Modelo + "', " + objCelular.P_Repacion + "', " +
+                    orden = "delete into Celulares values (" +objCelular.p_id+ ",'" + objCelular.P_Marca + ",'" + objCelular.p_Modelo + "', " + objCelular.P_Repacion + "', " +
                         objCelular.P_Estado + "', " + objCelular.P_Dni_Tecnico + "', " +
                         objCelular.P_FechaIngreso + "', " + objCelular.P_FechaEgreso + "',); ";
-                // falta la orden de borrar
-
+                
+                
+                
 
                 SqlCommand cmd = new SqlCommand(orden, conexion);
 
@@ -64,9 +65,9 @@ namespace Datos
 
 
             if (cual != "Todos") //entonces me va devolver un solo valor 
-                orden = "select * from Celular where Id = " + int.Parse(cual) + ";";
+                orden = "select * from Celulares where CodCelular = " + int.Parse(cual) + ";";
             else
-                orden = "select * from Celular;";
+                orden = "select * from Celulares;";
 
 
             SqlCommand cmd = new SqlCommand(orden, conexion);
@@ -94,5 +95,9 @@ namespace Datos
             }
             return ds;
         }
+
+
     }
 }
+
+    

@@ -11,14 +11,16 @@ namespace Negocio
 {
     public class NegProfesionalCelular
     { 
-        AdminisCelulares DatosObjCelular = new AdminisCelulares(); 
+        AdminisCelulares DatosObjCelular = new AdminisCelulares();  
+
+
 
         public int abmCelulares(string accion, Celular objCelular)
         {
             return DatosObjCelular.abmCelulares(accion, objCelular); 
         } 
 
-        public DataSet listadoCelulares(string cual)
+        public DataSet ListadoCelulares(string cual)
         {
             return DatosObjCelular.listadoCelulares(cual);
         }
@@ -27,5 +29,8 @@ namespace Negocio
         {
             throw new NotImplementedException();
         }
+
+
+        
     }
 }
