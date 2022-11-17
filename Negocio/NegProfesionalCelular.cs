@@ -22,5 +22,10 @@ namespace Negocio
         {
             return DatosObjCelular.listadoCelulares(cual);
         }
+
+        public DataSet listadoCelulares(object value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

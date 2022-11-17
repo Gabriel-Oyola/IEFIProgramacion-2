@@ -59,6 +59,7 @@ namespace IEFIProgramacion_2
             dgvCelular.Columns.Add("7", "Fecha_Ingreso");
             dgvCelular.Columns.Add("8", "Fecha_Egreso");
 
+
             dgvCelular.Columns[0].Width = 100;
             dgvCelular.Columns[1].Width = 100;
             dgvCelular.Columns[2].Width = 100;
@@ -129,28 +130,52 @@ int.Parse(txtCostoTotal.Text), txtFechaIngreso.Text, txtFechaEgreso.Text);
 
         private void btAceptar_Click(object sender, EventArgs e)
         {
-
-            if (rdIngreso.Checked == true)
+            if (nuevo == false) //si el producto es viejo va a ser false
             {
-                Cargado.ingreso(cbEstado.SelectedItem.ToString());
+
+                if (rdIngreso.Checked == true)
+                {
+                    Cargado.ingreso(cbEstado.SelectedItem.ToString());
+                }
+                if (rdEgreso.Checked == true)
+                {
+                    Cargado.Egreso(cbEstado.SelectedItem.ToString());
+                }
+                // LlevarProdAldgv(NuevoProducto, fila);
+                int nResultado = -1;
+                nResultado = objNegCelular.abmCelulares("Modificar", Cargado);
+
+                if (nResultado != -1)
+                {
+                    LlenarDgv();
+                }
+                else
+
+                    MessageBox.Show("Error", "Se produjo error al insertar modificar al producto");
             }
-            if (rdEgreso.Checked == true)
+            else //si es nuevo entra por aca
             {
-                Cargado.Egreso(cbEstado.SelectedItem.ToString());
+                if (rdIngreso.Checked == true)
+                {
+                    nuevoIngreso.ingreso(cbEstado.SelectedItem.ToString());
+                }
+                if (rdEgreso.Checked == true)
+                {
+                    nuevoIngreso.Egreso(cbEstado.SelectedItem.ToString());
+                }
+                // LlevarProdAldgv(NuevoProducto, fila);
+                int nResultado = -1;
+                nResultado = objNegCelular.abmCelulares("Modificar", nuevoIngreso);
+
+                if (nResultado != -1)
+                {
+                    LlenarDgv();
+                }
+                else
+
+                    MessageBox.Show("Error", "Se produjo error al insertar modificar al producto");
             }
-            // LlevarProdAldgv(NuevoProducto, fila);
-            int nResultado = -1;
-            nResultado = objNegCelular.abmCelulares("Modificar", Cargado);
-
-            if (nResultado != -1)
-            {
-               LlenarDgv();
-            }
-            else
-
-                MessageBox.Show("Error", "Se produjo error añ insertar modificar al producto");
-
-
+            
             void LlevarProdAldgv(Celular Cel, int lugar)
             {
                 dgvCelular[0, lugar].Value = Cel.p_id;
@@ -168,17 +193,17 @@ int.Parse(txtCostoTotal.Text), txtFechaIngreso.Text, txtFechaEgreso.Text);
 
         private void dgvCelular_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            Cargado = new
-               Celular(Convert.ToInt32(dgvCelular.CurrentRow.Cells[0].Value),
+            Cargado = new Celular(Convert.ToInt32(dgvCelular.CurrentRow.Cells[0].Value),
                dgvCelular.CurrentRow.Cells[1].Value, dgvCelular.CurrentRow.Cells[2].Value, 
                dgvCelular.CurrentRow.Cells[3].Value, dgvCelular.CurrentRow.Cells[4].Value,
                 dgvCelular.CurrentRow.Cells[5].Value, dgvCelular.CurrentRow.Cells[6].Value.ToString(),
                  dgvCelular.CurrentRow.Cells[7].Value, dgvCelular.CurrentRow.Cells[8].Value
+               
                );
-
+            nuevo = false;
             DataSet ds = new DataSet();
 
-            ds = Objneg.listadoProductos(ProdExistente.p_codigo.ToString());
+            ds = objNegCelular.listadoCelulares(nuevoIngreso.p_id.ToString()); //busco uno en particular
             if (ds.Tables[0].Rows.Count > 0)
             {
                 Ds_a_Controles(ds);
@@ -186,11 +211,15 @@ int.Parse(txtCostoTotal.Text), txtFechaIngreso.Text, txtFechaEgreso.Text);
         }
         private void Ds_a_Controles(DataSet ds)
         {
-            lblCodigoMov.Text = ds.Tables[0].Rows[0]["codigo"].ToString();
-            lblDescripMov.Text = ds.Tables[0].Rows[0]["descripcion"].ToString();
-            lbl_StockMov.Text = ds.Tables[0].Rows[0]["stock"].ToString() + "unidades";
+            txtMarca.Text = ds.Tables[0].Rows[0]["Marca"].ToString();
+            txtModelo.Text = ds.Tables[0].Rows[0]["Modelo"].ToString();
+            //lbl_StockMov.Text = ds.Tables[0].Rows[0]["stock"].ToString() + "unidades";
+            txtReparacion.Text = ds.Tables[0].Rows[0]["Reparacion"].ToString();
+            txtCostoTotal.Text = ds.Tables[0].Rows[0]["Costo Total"].ToString();
+            txtFechaIngreso.Text = ds.Tables[0].Rows[0]["Fecha Ingreso"].ToString();
+            txtFechaEgreso.Text = ds.Tables[0].Rows[0]["Fecha Egreso"].ToString();
 
         }
     }
-    }
+    
 }
